@@ -1,0 +1,12 @@
+새 폴더면 git init
+git clone 주소 복붙(필요할 때마다)
+
+파일 작성하고
+git add .
+git commit -m "coment"
+git push -u origin master
+
+
+
+
+

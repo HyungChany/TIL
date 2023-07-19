@@ -1,0 +1,10 @@
+import requests
+
+url='https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=1075'
+
+result=requests.get(url).json()
+
+print(result.values())
+
+#아니면 keys
+//////////////////////////////////////////
