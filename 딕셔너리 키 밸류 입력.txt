@@ -1,0 +1,8 @@
+arr={}
+
+for _ in range(a):
+    x,y=input().split()
+    arr[x]=y
+
+
+//x=키 ,y=밸류
