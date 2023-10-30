@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1>Liked Movie List</h1>
+  <a href="{% url "movies:index" %}">[back]</a>
+  <hr>
+  <ul>
+    {% for movie in like_movies %}
+      <h2>
+        <li>
+          <a href="{% url "movies:detail" movie.pk %}">{{movie.title}}</a>
+        </li>
+      </h2>
+    {% endfor %}
+  </ul>
+{% endblock content %}

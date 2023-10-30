@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>영화 상세 정보</h2>
+  {% if movie.img %}
+    <img src="{{ movie.img.url }}" alt="{{ movie.title }}" class="img-fluid">
+  {% endif %}
+  <p>{{ movie.title }}</p>
+  <p>{{ movie.description }}</p>
+  <p>장르 :
+    {{ movie.genre }}</p>
+  <p>평점 :
+    {{ movie.score }}</p>
+
+  <hr>
+
+  {% if movie.user == request.user %}
+    <div class="btn-group">
+      <a href="{% url 'movies:update' movie.pk %}" class="btn btn-secondary mr-2">수정</a>
+      <form action="{% url 'movies:delete' movie.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">삭제</button>
+      </form>
+    </div>
+    <hr>{% endif %}
+
+  <p>댓글 목록</p>
+
+  <ul class="list-group">
+    {% for comment in comments %}
+      <li class="list-group-item" style="display: flex; justify-content: space-between; align-items:center">
+        <div>
+          {{ comment.user }}
+          -
+          {{ comment.content }}
+        </div>
+
+        {% if comment.user == request.user %}
+          <form action="{% url 'movies:comments_delete' movie.pk comment.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">삭제</button>
+          </form>
+        {% endif %}
+
+      </li>
+    {% endfor %}
+  </ul>
+
+  <br>
+  <form action="{% url 'movies:comments_create' movie.pk %}" method="POST">
+    {% csrf_token %}
+    <label for="comment">댓글</label>
+    {{ comment_form.content }}
+    <input type="submit" value="등록">
+  </form>
+
+  <hr>
+  <a href="{% url 'movies:index' %}" class="btn btn-primary">뒤로</a>
+
+{% endblock %}

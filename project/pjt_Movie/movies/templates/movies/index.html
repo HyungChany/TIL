@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  <h1>영화 목록</h1>
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    {% for movie in movies %}
+      <div class="col-md-5">
+        <div class="card my-3">
+          {% if movie.img %}
+            <img src="{{movie.img.url}}" class="card-img-top" alt="{{ movie.title }}">
+          {% endif %}
+          <div class="card-header">
+            {{ movie.title }}
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{ movie.description }}</p>
+            <div class="d-flex">
+              <a href="{% url "movies:detail" movie.pk %}" class="btn btn-primary">자세히</a>
+              <form action="{% url "movies:likes" movie.pk %}" method="POST">
+                {% csrf_token %}
+                {% if request.user in movie.like_users.all %}
+                    <input type="submit" value="좋아요 취소">
+                {% else %}
+                    <input type="submit" value="좋아요">
+                {% endif %}
+              </form>
+            </div>
+          
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock %}

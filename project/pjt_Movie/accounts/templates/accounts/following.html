@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Folloing List</h1>
+  <a href="{% url "movies:index" %}">[back]</a>
+  <hr>
+
+  {% if followers %}
+    <ul>
+      {% for following in followings %}
+        <h2>
+          <li>
+            <a href="{% url 'accounts:profile' follower %}">{{ follower }}</a>
+          </li>
+        </h2>
+
+      {% endfor %}
+    </ul>
+
+  {% else %}
+    팔로잉하는 사람이 없습니다.
+  {% endif %}
+
+{% endblock content %}

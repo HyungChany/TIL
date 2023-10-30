@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ person.username }}의 프로필</h1>
+
+  {% if request.user != person %}
+  <form action="{% url "accounts:follow" person.pk %}" method="POST">
+    {% csrf_token %}
+    {% if request.user in person.followers.all %}
+       <input type="submit" value='언팔로우'>
+    {% else %}
+      <input type="submit" value="팔로우"> 
+       {% endif %}
+  </form>
+  {% endif %}
+  <h3>좋아요한 영화</h3>
+  <ul>
+    {% for movie in person.like_movies.all %}
+      <li>{{movie.title}}</li>
+    {% endfor %}
+  </ul>
+<hr>
+  <h3>팔로워</h3>
+  <ul>
+    {% for follow in person.followers.all %}
+      <li>{{follow.username}}</li>
+    {% endfor %}
+  </ul>
+
+  <h3>팔로우</h3>
+  <ul>
+    {% for following in person.followings.all %}
+      <li>{{following.username}}</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}
