@@ -1,0 +1,53 @@
+python -m venv 이름
+
+source ~/Desktop/office/pt1/Scripts/activate
+source ~/venv/firstpjt/Scripts/activate
+가상환경
+
+pip install -r requirements.txt
+
+pip install django
+
+pip freeze > requirments.txt
+
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py createsuperuser
+
+
+제일 처음 기본 틀 만들기(프로젝트 생성)
+django-admin startproject 프로젝트 이름
+django-admin startproject web_study
+
+python manage.py startapp 앱이름
+
+python manage.py runserver
+
+/
+
+1. 가상환경 만들기 Django 설치
+
+$ python -m venv [가상환경 이름]  
+$ source ~/venv/[가상환경 이름]/Script/Activate
+
+2. 필요한 프로그램 설치 
+
+$ pip freeze > requirements.txt
+$ pip install -r ./requirements.txt
+
+$ django-admin startproject [프로젝트이름]
+$ python manage.py startapp [앱이름]
+
+3. 앱을 setting.py 등록
+4. urls 경로 -> views.py -> templates(html 문서)
+
+$ python manage.py runserver
+
+/
+
+/3일
+makemigrations
+migrate
+

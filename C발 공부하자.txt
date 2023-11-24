@@ -1,0 +1,11 @@
+문자열: 
+char str[200] = 199자 제한
+scanf("%s", str, sizeof(str));
+printf("%s", str)
+
+
+배열 크기 입력 
+#include <stdlib.h>
+
+int* arr = (int*)malloc(a * sizeof(int));
+free(arr);

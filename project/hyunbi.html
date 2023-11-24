@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div id="test">
+  <div v-if="index < 4">
+    <h1> 멋쟁이 테스트 </h1>
+    <p> {{ question_list[index] }} </p>
+    <button @click=answer_func class="btn-yes">O</button>
+    <button @click="index++" class="btn-no">X</button>  
+  </div>
+  <div id="result" v-if="index === 4">
+    <button @click=result_func>결과보기</button>
+    <p>{{ result }}</p>
+  </div>
+</div>
+
+    
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref } = Vue
+
+    createApp({
+      setup(){
+        const answer = ref(0)
+        const index = ref(0)
+        const question_list = ref([
+          '현비가 태어난 곳은 광주이다.', 
+          '현비의 생일은 4월이다.',
+          '현비의 핸드폰 번호 맨 끝자리는 7이다.',
+          '현비는 예쁘다'
+        ])
+        const result = ref('')
+        const result_func = function () {
+            if (answer.value === 4) {
+              result.value = '당신은 현비천재!'
+            } else {
+              result.value = '당신은 현비바보..'
+            }
+            console.log(answer.value)
+        }
+        const answer_func = function () {
+          index.value++
+          answer.value++
+        }
+        return{
+          answer,
+          index,
+          question_list,
+          result,
+          result_func,
+          answer_func
+        }
+      }
+    }).mount('#test')
+  </script>
+</body>
+</html>
